@@ -594,6 +594,8 @@ class RegisterJobSeekerView(View):
     def post(self, request):
         try:
             data = json.loads(request.body.decode('utf-8'))
+            print(data)
+            print("agreed_to_terms => ", data.get('agreed_to_terms'))
         except json.JSONDecodeError:
             return JsonResponse({'success': False, 'errors': 'Invalid JSON'}, status=400)
 

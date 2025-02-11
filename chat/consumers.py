@@ -183,10 +183,10 @@ class ChatConsumer(AsyncJsonWebsocketConsumer):
 
                 # Make sure the latest message is at the last in the data sent to frontend
                 # The messages are already ordered by timestamp descending, so we just send them
-                await self.send_json({
+                await self.send_json(json.loads(json.dumps({
                     "message": "Messages retrieved successfully",
                     "data": message_data,
-                })
+                }, ensure_ascii=False)))
             else:
                 await self.send_json({
                     "message": "No messages found",

@@ -83,6 +83,7 @@ class UniversityInCharge(models.Model):
     college_person_name = models.CharField(max_length=255,default="Null")
     agreed_to_terms = models.BooleanField(default=True)
     token = models.CharField(max_length=255, blank=True, null=True)
+    trimmed_university_name = models.CharField(max_length=255, default='N/A')
     # otp_code = models.CharField(max_length=6, blank=True, null=True)
     # otp_generated_at = models.DateTimeField(blank=True, null=True)
 

@@ -101,4 +101,3 @@ class Command(BaseCommand):
             self.stdout.write(self.style.ERROR(f'File not found: {e.filename}'))
         except Exception as e:
             self.stdout.write(self.style.ERROR(f'An error occurred: {str(e)}'))
-

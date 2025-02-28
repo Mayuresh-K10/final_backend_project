@@ -52,8 +52,14 @@ urlpatterns = [
     path('consultant-verify-otp/', views.VerifyConsultantOTPView.as_view(), name='verify_consultant_otp'),
     path('consultant-resend-otp/', views.ResendConsultantOtpView.as_view(), name='resend-consultant-otp'),
     path('consultant-reset-password/', views.ResetPasswordConsultantView.as_view(), name='reset-consultant-password'),
+    path('submit-contact/', views.submit_contact_form, name='submit-contact'),
+    path('submit-question/', views.submit_question, name='submit-question'),
+    path('submit-answer/<int:question_id>/', views.submit_answer, name='submit-answer'),
+    path("submit-review/", views.submit_admission_review, name="submit-review"),
+
 
     #path('verify-token/', views.verify_token, name='verify_token'),
     #path('verify-linkedin/', views.verify_linkedin_token, name='verify_linkedin'),
     #path('search/', views.search, name='search'),
+
 ]

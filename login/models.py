@@ -74,6 +74,7 @@ class CompanyInCharge(models.Model):
 
 class UniversityInCharge(models.Model):
     # user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    clg_id = models.CharField(max_length=400, default="Null", blank=True, null=True)
     university_name = models.CharField(max_length=255)
     official_email = models.EmailField(unique=True,default="Null")
     country_code = models.CharField(max_length=3, default='+91')
@@ -83,7 +84,7 @@ class UniversityInCharge(models.Model):
     college_person_name = models.CharField(max_length=255,default="Null")
     agreed_to_terms = models.BooleanField(default=True)
     token = models.CharField(max_length=255, blank=True, null=True)
-    trimmed_university_name = models.CharField(max_length=255, default='N/A')
+    # trimmed_university_name = models.CharField(max_length=255, default='N/A')
     # otp_code = models.CharField(max_length=6, blank=True, null=True)
     # otp_generated_at = models.DateTimeField(blank=True, null=True)
 
@@ -145,3 +146,70 @@ class JobSeeker(models.Model):
 
     def __str__(self):
       return f"{self.first_name} {self.last_name}"
+
+class Contact(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    subject = models.CharField(max_length=255)
+    website = models.URLField(blank=True, null=True)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+    
+class Question(models.Model):
+    text = models.TextField()
+    answer = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text[:50]
+
+class AdmissionReview1(models.Model):
+    college_name = models.CharField(max_length=255)
+    other_college_name = models.CharField(max_length=255, blank=True, null=True)
+    course_name = models.CharField(max_length=255)
+    other_course_name = models.CharField(max_length=255, blank=True, null=True)
+    student_name = models.CharField(max_length=255)
+    email = models.EmailField()
+    country_code=models.CharField(max_length=5,default='IN')
+    phone_number = models.CharField(max_length=20)
+    gender = models.CharField(max_length=10, choices=[('Male', 'Male'), ('Female', 'Female'), ('Other', 'Other')])
+    linkedin_profile = models.URLField(blank=True, null=True)
+    course_fees = models.DecimalField(max_digits=10, decimal_places=2)
+    year = models.IntegerField()
+    referral_code = models.CharField(max_length=50, blank=True, null=True)
+    apply = models.CharField(max_length=20, default='applied')
+    anvil_reservation_benefits = models.BooleanField()
+    benefit = models.CharField(max_length=20, default='Benefits')
+    gd_pi_admission = models.BooleanField()
+    class_size = models.IntegerField()
+    opted_hostel = models.BooleanField()
+    college_provides_placements = models.BooleanField()
+    hostel_fees = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    average_package = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    admission_process = models.TextField()
+    course_curriculum_faculty = models.TextField()
+    fees_structure_scholarship = models.TextField()
+    liked_things = models.TextField()
+    disliked_things = models.TextField()
+
+    # File fields instead of URL fields
+    profile_photo = models.FileField(upload_to='uploads/profile_photos/', blank=True, null=True)
+    campus_photos = models.FileField(upload_to='uploads/campus_photos/', blank=True, null=True)
+    certificate_id_card = models.FileField(upload_to='uploads/certificates/', blank=True, null=True)
+    graduation_certificate = models.FileField(upload_to='uploads/graduation_certificates/', blank=True, null=True)
+
+
+    agree_terms = models.BooleanField(default=True)
+    
+class UnregisteredColleges(models.Model):
+    university_name = models.CharField(max_length=255)
+    official_email = models.EmailField(unique=True,default="Null")
+    country_code = models.CharField(max_length=3, default='+91')
+    mobile_number = models.CharField(max_length=15,default="Null")
+    password = models.CharField(max_length=128,default="null")
+    linkedin_profile = models.URLField(blank=True, null=True)
+    college_person_name = models.CharField(max_length=255,default="Null")
+    agreed_to_terms = models.BooleanField(default=True)
